@@ -1,5 +1,7 @@
 <template>
-  <div class="flex items-center h-screen flex-col justify-center  user-auth">
+
+
+  <div v-if="repositories.length === 0" class="flex items-center h-screen flex-col justify-center  user-auth">
 
     <form @submit.prevent="handleSubmit">
 
@@ -25,6 +27,7 @@
     </form>
 
   </div>
+  <UserAvatar v-if="repositories.length" :userName="userName"/>
   <RepositoriesListing v-if="repositories.length" :repositories="repositories"></RepositoriesListing>
 
 </template>
@@ -33,9 +36,10 @@
 import {defineComponent} from 'vue'
 import axios from "axios";
 import RepositoriesListing from "@/components/RepositoriesListing.vue";
+import UserAvatar from "@/components/UserAvatar.vue";
 
 export default defineComponent({
-  components: {RepositoriesListing},
+  components: {UserAvatar, RepositoriesListing},
 
   data() {
     return {
