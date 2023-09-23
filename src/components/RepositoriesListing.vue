@@ -1,6 +1,6 @@
 <template>
 
-  <div class="repo-container ">
+  <div v-if="repositories?.length" class="repo-container ">
     <h1 class="mb-2.5">Results:</h1>
     <div class="jobs-table relative overflow-x-auto shadow sm:rounded-lg">
       <table class="w-full text-sm text-left text-gray-500 dark:text-gray-400">
@@ -32,6 +32,11 @@
       </table>
 
     </div>
+
+  </div>
+  <div v-else class="repo-container ">
+
+    <h1>Oops! It seems that a repository with that name is not available 🫣</h1>
   </div>
 </template>
 
