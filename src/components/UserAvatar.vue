@@ -30,7 +30,10 @@ export default defineComponent({
           this.avatarUrl = response.data.avatar_url;
           this.followers = response.data.followers
 
-        })
+        }).catch(error=>{
+
+          console.error(error)
+    })
 
   }
 })
@@ -41,7 +44,7 @@ export default defineComponent({
 
 
   <div class="flex items-center justify-center mt-16 space-x-4">
-    <img class="w-10 h-10 rounded-full" :src="avatarUrl" :alt="userName">
+    <img class="w-20 h-20 rounded-full" :src="avatarUrl" :alt="userName">
     <div class="font-medium dark:text-white">
       <div>{{userName}}</div>
       <div class="text-sm text-gray-500 dark:text-gray-400">{{followers}} followers</div>
