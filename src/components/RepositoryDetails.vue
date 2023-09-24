@@ -34,14 +34,20 @@ axios
 
 function handleBranchChange() {
 
-  console.log(selectedBranch)
+  axios
+      .get(`${URI}/commits?sha/${selectedBranch.value}`)
+      .then((response) => {
+        commits.value = response.data;
+        console.log(commits.value)
+
+      })
+      .catch((error) => {
+        console.error("Error: ", error)
+      })
+
 
 }
 
-
-function handleClick(e: Event) {
-  console.log("clicked")
-}
 
 </script>
 
@@ -50,7 +56,7 @@ function handleClick(e: Event) {
 
     <select v-model="selectedBranch" @change="handleBranchChange" id="search-filter"
             class="mb-8 bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
-      <option @click="handleClick" v-for="branch in branches" :value="branch.name">{{
+      <option v-for="branch in branches" :value="branch.name">{{
           branch.name
         }}
       </option>

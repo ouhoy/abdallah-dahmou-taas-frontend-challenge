@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import {defineComponent, onMounted, PropType, ref} from 'vue'
-import RepositoriesListing from "@/components/RepositoriesListing.vue";
+import RepositoriesListing from "@/components/SearchResults.vue";
 
 interface Repo {
   name: string,
@@ -13,6 +13,7 @@ const searchMethod = ref("name");
 
 
 const {repositories, userName} = defineProps<{ repositories: Repo[], userName: string }>()
+
 
 function filteredRepos() {
 
