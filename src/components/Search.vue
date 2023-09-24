@@ -1,3 +1,35 @@
+<script setup lang="ts">
+import {defineComponent, PropType, ref} from 'vue'
+import RepositoriesListing from "@/components/RepositoriesListing.vue";
+
+interface Repo {
+  name: string,
+  id: number,
+
+}
+
+const search = ref("");
+const searchMethod = ref("name");
+
+
+const props = defineProps<{ repositories: Repo[] }>()
+
+function filteredRepos() {
+
+  return props.repositories?.filter((repo: Repo) => {
+
+    if (searchMethod.value === "id") return repo.id === Number(search.value);
+
+    if (searchMethod.value === "name") return repo.name.toLowerCase().includes(search.value.toLowerCase());
+
+
+  });
+}
+
+
+</script>
+
+
 <template>
 
 
@@ -45,48 +77,10 @@
 
   </div>
 
-  <RepositoriesListing v-if="search" :repositories="filteredRepos"></RepositoriesListing>
+  <RepositoriesListing v-if="search" :repositories="filteredRepos()"></RepositoriesListing>
 
 
 </template>
-
-<script lang="ts">
-import {defineComponent, PropType} from 'vue'
-import RepositoriesListing from "@/components/RepositoriesListing.vue";
-
-interface Repo {
-  name: string,
-  id: number,
-
-}
-
-export default defineComponent({
-  name: "Search",
-  props: {
-    repositories: Array as PropType<Repo[]>
-  },
-  components: {RepositoriesListing},
-  data() {
-    return {
-      search: "",
-      searchMethod: "name",
-
-    }
-  },
-  computed: {
-    filteredRepos() {
-      return this.repositories?.filter((repo: Repo) => {
-
-        if (this.searchMethod === "id") return repo.id === Number(this.search);
-
-        if (this.searchMethod === "name") return repo.name.toLowerCase().includes(this.search.toLowerCase());
-
-
-      });
-    }
-  }
-})
-</script>
 
 
 <style scoped>

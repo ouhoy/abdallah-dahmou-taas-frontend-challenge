@@ -1,3 +1,20 @@
+<script setup lang="ts">
+
+interface Repo {
+  name: string,
+  id: number,
+
+}
+
+defineProps<{ repositories: Repo[] }>();
+
+function handleClick(repo: Repo) {
+  console.log(repo.name)
+}
+
+</script>
+
+
 <template>
 
   <div v-if="repositories?.length" class="repo-container ">
@@ -40,25 +57,6 @@
   </div>
 </template>
 
-<script lang="ts">
-
-interface Repo {
-  name: string,
-  id: number,
-
-}
-
-export default {
-  props: {"repositories": Array},
-  methods: {
-    handleClick(repo: Repo) {
-      console.log(repo.name)
-    }
-  },
-
-}
-
-</script>
 
 <style scoped>
 .repo-container {

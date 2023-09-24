@@ -18,8 +18,7 @@ function handleSubmit() {
   axios
       .get(`https://api.github.com/users/${userName.value}/repos`)
       .then((response) => {
-        console.log(userName)
-        console.log(response.data)
+
         repositories.value = response.data;
       })
       .catch((error) => {
