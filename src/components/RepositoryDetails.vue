@@ -1,14 +1,17 @@
 <script setup lang="ts">
 import axios from "axios";
-import {ref} from "vue";
+import {onMounted, ref} from "vue";
 
 const {repository, userName} = defineProps<{ repository: string, userName: string }>();
-
+const URI = `https://api.github.com/repos/${userName}/${repository}`;
 
 const commits = ref([])
 const branches = ref([])
+const selectedBranch = ref("")
+
+
 axios
-    .get(`https://api.github.com/repos/${userName}/${repository}/commits`)
+    .get(`${URI}/commits`)
     .then((response) => {
       commits.value = response.data;
       console.log(response.data)
@@ -19,24 +22,38 @@ axios
     })
 
 axios
-    .get(`https://api.github.com/repos/${userName}/${repository}/branches`)
+    .get(`${URI}/branches`)
     .then((res) => {
       branches.value = res.data;
-      console.log(res.data)
+      selectedBranch.value = res.data[0].name;
 
     })
     .catch((err) => {
       console.error("Error: ", err)
     });
 
+function handleBranchChange() {
+
+  console.log(selectedBranch)
+
+}
+
+
+function handleClick(e: Event) {
+  console.log("clicked")
+}
+
 </script>
 
 <template>
   <div class="repo-container">
 
-    <select id="search-filter" v-for="branch in branches"
+    <select v-model="selectedBranch" @change="handleBranchChange" id="search-filter"
             class="mb-8 bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
-      <option :value="branch.name">{{ branch.name }}</option>
+      <option @click="handleClick" v-for="branch in branches" :value="branch.name">{{
+          branch.name
+        }}
+      </option>
 
 
     </select>
