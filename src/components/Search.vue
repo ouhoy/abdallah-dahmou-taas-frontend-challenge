@@ -12,11 +12,11 @@ const search = ref("");
 const searchMethod = ref("name");
 
 
-const props = defineProps<{ repositories: Repo[] }>()
+const {repositories, userName} = defineProps<{ repositories: Repo[], userName: string }>()
 
 function filteredRepos() {
 
-  return props.repositories?.filter((repo: Repo) => {
+  return repositories?.filter((repo: Repo) => {
 
     if (searchMethod.value === "id") return repo.id === Number(search.value);
 
@@ -77,7 +77,7 @@ function filteredRepos() {
 
   </div>
 
-  <RepositoriesListing v-if="search" :repositories="filteredRepos()"></RepositoriesListing>
+  <RepositoriesListing v-if="search" :userName="userName" :repositories="filteredRepos()"></RepositoriesListing>
 
 
 </template>

@@ -65,7 +65,7 @@ function handleSubmit() {
   </div>
 
   <UserAvatar v-if="repositories.length" :userName="userName"/>
-  <Search v-if="repositories.length" :repositories="repositories"/>
+  <Search v-if="repositories.length" :userName="userName" :repositories="repositories"/>
 
 </template>
 

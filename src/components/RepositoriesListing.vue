@@ -1,15 +1,20 @@
 <script setup lang="ts">
 
+import RepositoryDetails from "@/components/RepositoryDetails.vue";
+import {ref} from "vue";
+
 interface Repo {
   name: string,
   id: number,
 
 }
 
-defineProps<{ repositories: Repo[] }>();
+const {repositories, userName} = defineProps<{ repositories: Repo[], userName: string }>();
+const selectedRepository = ref("");
+
 
 function handleClick(repo: Repo) {
-  console.log(repo.name)
+  selectedRepository.value = repo.name
 }
 
 </script>
@@ -17,7 +22,8 @@ function handleClick(repo: Repo) {
 
 <template>
 
-  <div v-if="repositories?.length" class="repo-container ">
+
+  <div v-if="repositories?.length && !selectedRepository" class="repo-container ">
     <h1 class="mb-2.5">Results:</h1>
     <div class="jobs-table relative overflow-x-auto shadow sm:rounded-lg">
       <table class="w-full text-sm text-left text-gray-500 dark:text-gray-400">
@@ -51,14 +57,17 @@ function handleClick(repo: Repo) {
     </div>
 
   </div>
-  <div v-else class="repo-container ">
+
+  <div v-else-if="repositories.length == 0" class="repo-container ">
 
     <h1>Oops! It seems that a repository with that name is not available 🫣</h1>
   </div>
+
+  <RepositoryDetails v-if="selectedRepository" :userName="userName" :repository="selectedRepository"/>
 </template>
 
 
-<style scoped>
+<style>
 .repo-container {
   width: 95%;
   max-width: 1200px;
