@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import {defineComponent, PropType, ref} from 'vue'
+import {defineComponent, onMounted, PropType, ref} from 'vue'
 import RepositoriesListing from "@/components/RepositoriesListing.vue";
 
 interface Repo {
