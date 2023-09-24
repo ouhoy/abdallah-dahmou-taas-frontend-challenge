@@ -6,7 +6,7 @@ const {repository, userName} = defineProps<{ repository: string, userName: strin
 
 
 const commits = ref([])
-
+const branches = ref([])
 axios
     .get(`https://api.github.com/repos/${userName}/${repository}/commits`)
     .then((response) => {
@@ -18,12 +18,28 @@ axios
       console.error("Error: ", error)
     })
 
+axios
+    .get(`https://api.github.com/repos/${userName}/${repository}/branches`)
+    .then((res) => {
+      branches.value = res.data;
+      console.log(res.data)
+
+    })
+    .catch((err) => {
+      console.error("Error: ", err)
+    });
+
 </script>
 
 <template>
   <div class="repo-container">
 
+    <select id="search-filter" v-for="branch in branches"
+            class="mb-8 bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
+      <option :value="branch.name">{{ branch.name }}</option>
 
+
+    </select>
     <ol v-for="commit in commits" class="relative border-l border-gray-200 dark:border-gray-700">
       <li class="mb-10 ml-6">
         <span
@@ -35,9 +51,10 @@ axios
           <time class="mb-1 text-xs font-normal text-gray-400 sm:order-last sm:mb-0">{{ commit.commit.author.date }}
           </time>
           <div class="text-sm font-normal text-gray-500 dark:text-gray-300" about="_blank"><a :href="commit?.html_url"
-                                                                               class="font-semibold text-blue-600 dark:text-blue-500 hover:underline">{{ commit.commit.message }}</a>
-            to <span
-                class="bg-gray-100 text-gray-800 text-xs font-normal mr-2 px-2.5 py-0.5 rounded dark:bg-gray-600 dark:text-gray-300">Funny Group</span>
+                                                                                              class="font-semibold text-blue-600 dark:text-blue-500 hover:underline">{{
+              commit.commit.message
+            }}</a>
+
           </div>
         </div>
       </li>
