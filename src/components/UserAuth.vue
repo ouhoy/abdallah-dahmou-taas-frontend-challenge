@@ -1,3 +1,40 @@
+<script setup lang="ts">
+import {ref} from 'vue'
+import axios from "axios";
+import UserAvatar from "@/components/UserAvatar.vue";
+import Search from "@/components/Search.vue";
+
+
+const userName = ref("")
+const userNameError = ref("")
+const repositories = ref([])
+const isLoading = ref(false)
+
+function handleSubmit() {
+
+  userNameError.value = !userName ? "User name is required" : ""
+  isLoading.value = true
+
+  axios
+      .get(`https://api.github.com/users/${userName.value}/repos`)
+      .then((response) => {
+        console.log(userName)
+        console.log(response.data)
+        repositories.value = response.data;
+      })
+      .catch((error) => {
+        userNameError.value = !userName ? "Username is required" : "Username does not exist"
+        console.error("Error: ", error)
+      })
+      .finally(() => {
+        isLoading.value = false
+      });
+}
+
+
+</script>
+
+
 <template>
 
 
@@ -32,52 +69,6 @@
   <Search v-if="repositories.length" :repositories="repositories"/>
 
 </template>
-
-<script lang="ts">
-import {defineComponent} from 'vue'
-import axios from "axios";
-import RepositoriesListing from "@/components/RepositoriesListing.vue";
-import UserAvatar from "@/components/UserAvatar.vue";
-import Search from "@/components/Search.vue";
-
-export default defineComponent({
-  components: {Search, UserAvatar, RepositoriesListing},
-
-  data() {
-    return {
-      userName: "",
-      userNameError: "",
-      repositories: [],
-      filteredResult: this.repositories,
-      isLoading: false,
-
-    }
-  },
-  methods: {
-    handleSubmit() {
-
-      this.userNameError = !this.userName ? "User name is required" : ""
-      this.isLoading = true
-
-      axios
-          .get(`https://api.github.com/users/${this.userName}/repos`)
-          .then((response) => {
-            this.repositories = response.data;
-          })
-          .catch((error) => {
-            this.userNameError = !this.userName ? "Username is required" : "Username does not exist"
-            console.error("Error: ", error)
-          })
-          .finally(() => {
-            this.isLoading = false
-          });
-    }
-  },
-
-
-})
-
-</script>
 
 
 <style scoped>
