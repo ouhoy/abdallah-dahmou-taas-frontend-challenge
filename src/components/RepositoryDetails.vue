@@ -1,6 +1,7 @@
 <script setup lang="ts">
 import axios from "axios";
-import {onMounted, ref} from "vue";
+import {ref} from "vue";
+import getCommits from "@/composables/getCommits";
 
 const {repository, userName} = defineProps<{ repository: string, userName: string }>();
 const URI = `https://api.github.com/repos/${userName}/${repository}`;
@@ -10,17 +11,10 @@ const branches = ref([])
 const selectedBranch = ref("")
 
 
-axios
-    .get(`${URI}/commits`)
-    .then((response) => {
-      commits.value = response.data;
-      console.log(response.data)
+getCommits(`${URI}/commits`, commits)
 
-    })
-    .catch((error) => {
-      console.error("Error: ", error)
-    })
 
+// Get available branches
 axios
     .get(`${URI}/branches`)
     .then((res) => {
@@ -33,18 +27,7 @@ axios
     });
 
 function handleBranchChange() {
-
-  axios
-      .get(`${URI}/commits?sha/${selectedBranch.value}`)
-      .then((response) => {
-        commits.value = response.data;
-        console.log(commits.value)
-
-      })
-      .catch((error) => {
-        console.error("Error: ", error)
-      })
-
+  getCommits(`${URI}/commits?sha/${selectedBranch.value}`, commits)
 
 }
 

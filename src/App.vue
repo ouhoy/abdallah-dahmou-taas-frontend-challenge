@@ -1,23 +1,17 @@
+<script setup lang="ts">
+import UserAuth from "@/views/UserAuth.vue";
+import "./index.css"
+
+
+</script>
 
 
 <template>
 
-  <UserAuth />
+  <UserAuth/>
 
 </template>
 
-<script lang="ts">
-import {defineComponent} from 'vue';
-import UserAuth from "@/components/UserAuth.vue";
-import "./index.css"
-
-export default defineComponent({
-  name: 'App',
-  components: {
-    UserAuth,
-  }
-});
-</script>
 
 <style>
 #app {
