@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import {defineComponent, onMounted, PropType, ref} from 'vue'
-import RepositoriesListing from "@/components/SearchResults.vue";
+import SearchResults from "@/components/SearchResults.vue";
 
 interface Repo {
   name: string,
@@ -19,7 +19,7 @@ function filteredRepos() {
 
   return repositories?.filter((repo: Repo) => {
 
-    if (searchMethod.value === "id") return repo.id === Number(search.value);
+    if (searchMethod.value === "id") return repo.id.toString().includes(search.value);
 
     if (searchMethod.value === "name") return repo.name.toLowerCase().includes(search.value.toLowerCase());
 
@@ -78,7 +78,8 @@ function filteredRepos() {
 
   </div>
 
-  <RepositoriesListing v-if="search" :userName="userName" :repositories="filteredRepos()"></RepositoriesListing>
+  <SearchResults :searchMethod="searchMethod" v-if="search" :userName="userName"
+                 :repositories="filteredRepos()"></SearchResults>
 
 
 </template>

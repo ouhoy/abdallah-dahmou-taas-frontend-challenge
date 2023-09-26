@@ -9,7 +9,7 @@ interface Repo {
 
 }
 
-const {repositories, userName} = defineProps<{ repositories: Repo[], userName: string }>();
+const {repositories, userName, searchMethod} = defineProps<{ repositories: Repo[], userName: string, searchMethod: string }>();
 const selectedRepository = ref("");
 
 
@@ -60,7 +60,7 @@ function handleClick(repo: Repo) {
 
   <div v-else-if="repositories.length == 0" class="repo-container ">
 
-    <h1>Oops! It seems that a repository with that name is not available 🫣</h1>
+    <h1>Oops! It seems that a repository with that {{ searchMethod}} is not available 🫣</h1>
   </div>
 
   <RepositoryDetails v-if="selectedRepository" :userName="userName" :repository="selectedRepository"/>
