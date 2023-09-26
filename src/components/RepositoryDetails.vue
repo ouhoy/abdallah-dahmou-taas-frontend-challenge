@@ -27,7 +27,7 @@ axios
     });
 
 function handleBranchChange() {
-  getCommits(`${URI}/commits?sha/${selectedBranch.value}`, commits)
+  getCommits(`${URI}/commits?sha=${selectedBranch.value}`, commits)
 
 }
 
