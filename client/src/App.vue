@@ -1,22 +1,13 @@
 <script setup lang="ts">
-import UserAuth from "@/views/UserAuth.vue";
-import "./index.css"
-
 
 </script>
 
-
 <template>
 
-  <UserAuth/>
 
+  <RouterView />
 </template>
 
-
-<style>
-#app {
-
-}
-
+<style scoped>
 
 </style>
