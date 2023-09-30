@@ -2,8 +2,8 @@ import express from "express";
 import cors from "cors";
 import bodyParser from "body-parser";
 
-const CLIENT_ID = "91dd9e69e5483b579ec6";
-const CLIENT_SECRET = "30096e1de600aa11c7816cc88f82dcf5e77b5c13";
+const CLIENT_ID = "7157331bf4f721d679ce";
+const CLIENT_SECRET = "edd87ef75104bef65012499412cdbc934dde5855";
 
 const app = express();
 

@@ -2,13 +2,14 @@
 import {onMounted, ref} from 'vue'
 import UserAvatar from "@/components/UserAvatar.vue";
 import Search from "@/components/Search.vue";
-
+import {Octokit} from "@octokit/rest"
+import getAccessToken from "../composables/getAccessToken"
 
 const userName = ref("")
 const repositories = ref([])
 
-const CLIENT_ID = "b9c1d1c590ff8a10fd11"
-const CLIENT_SECRETS = "ea1a47d31d8ad6fa0f34fa77dc60a055e8e344e1"
+const CLIENT_ID = "7157331bf4f721d679ce"
+
 
 onMounted(async () => {
 
@@ -18,22 +19,18 @@ onMounted(async () => {
 
   if (!codeParam) return;
 
-  const params = `?client_id=${CLIENT_ID}&client_secret=${CLIENT_SECRETS}&code=${codeParam}`;
+  const accessToken = await getAccessToken(codeParam);
 
-  await fetch(`https://github.com/login/oauth/access_token${params}`, {
-  method: "GET",
-    headers: {
-      "Accept": "application/json",
-    }
-  })
-      .then((response) => {
-        return response.json();
-      })
-      .then((data) => {
+  const octokit = new Octokit({auth: `token ${accessToken}`});
+
+  octokit.repos.listForAuthenticatedUser()
+      .then(({data}) => {
         console.log(data)
 
       })
-
+      .catch((error) => {
+        console.error(`Error: ${error.message}`);
+      });
 
 })
 
