@@ -3,16 +3,18 @@
 import {onMounted, ref} from "vue";
 import {Octokit} from "@octokit/rest"
 import RepositoriesListing from "@/components/RepositoriesListing.vue";
+import UserInfo from "@/components/UserInfo.vue";
 
 const accessToken = ref("");
-const repositories = ref<any[]>([])
+const isAuth = ref(false)
 const error = ref("")
-const octokitInstance = ref();
 
 function handleClick() {
   console.log(import.meta.env.VITE_CLIENT_ID)
   window.location.assign(`https://github.com/login/oauth/authorize?client_id=${import.meta.env.VITE_CLIENT_ID}`)
 }
+
+let octokit: Octokit;
 
 onMounted(async () => {
 
@@ -24,48 +26,27 @@ onMounted(async () => {
 
   // Get token
   try {
-    const response = await fetch(`http://localhost:4000/getAccessToken?code=${codeParam}`, {
-      method: "GET",
-    });
+
+    const URI = `http://localhost:4000/getAccessToken?code=${codeParam}`;
+    const response = await fetch(URI, {method: "GET"});
+
     if (response.ok) {
+
       const data = await response.json();
       accessToken.value = data.access_token;
+
     }
 
   } catch (e) {
     window.history.pushState(null, "", "/");
 
-    console.error(`${e}. Please try again!`)
+    isAuth.value = false
     error.value = `${e}. Please try again!`;
 
   }
 
-
-  const octokit = new Octokit({auth: `token ${accessToken.value}`});
-
-  // Get Repositories
-  octokit.repos.listForAuthenticatedUser()
-      .then(({data}) => {
-        repositories.value = data;
-
-      })
-      .catch((e) => {
-        window.history.pushState(null, "", "/");
-
-        console.error(`Error: ${e.message}`);
-        error.value = `${e.message}. Please try again!`;
-      });
-
-  //Get User Data
-  try {
-    const response = await octokit.users.getAuthenticated();
-    const user = response.data;
-    console.log(user);
-  } catch (e) {
-    console.error('Error:', e);
-
-  }
-
+  octokit = new Octokit({auth: `token ${accessToken.value}`});
+  isAuth.value = true;
 
 })
 
@@ -73,7 +54,7 @@ onMounted(async () => {
 </script>
 
 <template>
-  <div v-if="!repositories.length">
+  <div v-if="!isAuth">
 
     <button @click="handleClick">Login with github</button>
   </div>
@@ -81,8 +62,9 @@ onMounted(async () => {
     {{ error }}
   </div>
 
-  <div v-if="repositories.length">
-    <RepositoriesListing :repositories="repositories"/>
+  <div v-if="isAuth">
+    <UserInfo :octokit="octokit"/>
+    <RepositoriesListing :octokit="octokit"/>
   </div>
 </template>
 
