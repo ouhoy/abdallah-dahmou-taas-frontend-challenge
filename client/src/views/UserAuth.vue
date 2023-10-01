@@ -8,7 +8,7 @@ import getAccessToken from "../composables/getAccessToken"
 const userName = ref("")
 const repositories = ref([])
 
-const CLIENT_ID = "7157331bf4f721d679ce"
+const CLIENT_ID = ""
 
 
 onMounted(async () => {
