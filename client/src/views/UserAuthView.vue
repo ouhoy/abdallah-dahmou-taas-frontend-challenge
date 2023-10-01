@@ -2,14 +2,13 @@
 
 import {onMounted, ref} from "vue";
 import {Octokit} from "@octokit/rest"
-
-const CLIENT_ID = "7157331bf4f721d679ce";
+import * as process from "process";
 
 const accessToken = ref("");
 const repositories = ref<any[]>([])
 
 function handleClick() {
-  window.location.assign(`https://github.com/login/oauth/authorize?client_id=${CLIENT_ID}`)
+  window.location.assign(`https://github.com/login/oauth/authorize?client_id=${process.env.CLIENT_ID}`)
 }
 
 onMounted(async () => {
@@ -52,7 +51,6 @@ onMounted(async () => {
       });
 
   //Get User Data
-
   try {
     const response = await octokit.users.getAuthenticated();
     const user = response.data;
