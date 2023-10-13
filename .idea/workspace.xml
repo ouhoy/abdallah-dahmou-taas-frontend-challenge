@@ -5,9 +5,15 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="268ab48f-0a6c-4a45-a26a-1ec79db4d3b1" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/client/src/components/UserInfo.vue" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/client/src/components/RepositoryCommits.vue" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/client/src/components/Search.vue" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/client/src/composables/getAccessToken.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/client/src/composables/getRepositories.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/client/src/composables/getUserInfo.ts" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/src/assets/main.css" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/assets/main.css" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/client/src/components/RepositoriesListing.vue" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/components/RepositoriesListing.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/src/components/UserInfo.vue" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/components/UserInfo.vue" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/client/src/views/UserAuthView.vue" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/views/UserAuthView.vue" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -19,6 +25,7 @@
     <option name="RECENT_TEMPLATES">
       <list>
         <option value="Vue Composition API Component" />
+        <option value="TypeScript File" />
       </list>
     </option>
   </component>
@@ -37,31 +44,31 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    "RunOnceActivity.OpenProjectViewOnStart": "true",
-    "RunOnceActivity.ShowReadmeOnStart": "true",
-    "WebServerToolWindowFactoryState": "false",
-    "dart.analysis.tool.window.visible": "false",
-    "git-widget-placeholder": "master",
-    "last_opened_file_path": "C:/Users/abdel/Desktop/DEV/abdallah-dahmou-taas-frontend-challenge",
-    "node.js.detected.package.eslint": "true",
-    "node.js.selected.package.eslint": "(autodetect)",
-    "node.js.selected.package.tslint": "(autodetect)",
-    "nodejs_package_manager_path": "npm",
-    "settings.editor.selected.configurable": "preferences.lookFeel",
-    "ts.external.directory.path": "C:\\Users\\abdel\\Desktop\\DEV\\abdallah-dahmou-taas-frontend-challenge\\client\\node_modules\\typescript\\lib",
-    "vue.rearranger.settings.migration": "true"
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;WebServerToolWindowFactoryState&quot;: &quot;false&quot;,
+    &quot;dart.analysis.tool.window.visible&quot;: &quot;false&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;master&quot;,
+    &quot;last_opened_file_path&quot;: &quot;C:/Users/abdel/Desktop/DEV/abdallah-dahmou-taas-frontend-challenge&quot;,
+    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
+    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
+    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
+    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
+    &quot;settings.editor.selected.configurable&quot;: &quot;preferences.lookFeel&quot;,
+    &quot;ts.external.directory.path&quot;: &quot;C:\\Users\\abdel\\Desktop\\DEV\\abdallah-dahmou-taas-frontend-challenge\\client\\node_modules\\typescript\\lib&quot;,
+    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
   },
-  "keyToStringList": {
-    "com.intellij.ide.scratch.ScratchImplUtil$2/New Scratch File": [
-      "GitIgnore"
+  &quot;keyToStringList&quot;: {
+    &quot;com.intellij.ide.scratch.ScratchImplUtil$2/New Scratch File&quot;: [
+      &quot;GitIgnore&quot;
     ],
-    "vue.recent.templates": [
-      "Vue Composition API Component"
+    &quot;vue.recent.templates&quot;: [
+      &quot;Vue Composition API Component&quot;
     ]
   }
-}]]></component>
+}</component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
       <recent name="C:\Users\abdel\Desktop\DEV\abdallah-dahmou-taas-frontend-challenge" />
@@ -80,7 +87,14 @@
       <workItem from="1696109071076" duration="244000" />
       <workItem from="1696109606004" duration="193000" />
       <workItem from="1696123319676" duration="4373000" />
-      <workItem from="1696180337412" duration="8544000" />
+      <workItem from="1696180337412" duration="16719000" />
+      <workItem from="1696332772533" duration="16000" />
+      <workItem from="1696505956515" duration="1162000" />
+      <workItem from="1696507508742" duration="8217000" />
+      <workItem from="1696520931036" duration="5979000" />
+      <workItem from="1696946407326" duration="4829000" />
+      <workItem from="1697124648403" duration="1099000" />
+      <workItem from="1697139307278" duration="4752000" />
     </task>
     <servers />
   </component>
