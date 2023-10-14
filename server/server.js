@@ -1,7 +1,8 @@
 import express from "express";
 import cors from "cors";
 import bodyParser from "body-parser";
-import { config } from 'dotenv';
+import {config} from 'dotenv';
+
 config();
 const app = express();
 
@@ -13,6 +14,7 @@ app.get("/getAccessToken", async (req, res) => {
     const code = req.query.code;
 
     const params = `?client_id=${process.env.CLIENT_ID}&client_secret=${process.env.CLIENT_SECRET}&code=${code}`;
+
 
 
     try {

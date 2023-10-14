@@ -1,28 +1,39 @@
 <script setup lang="ts">
 
-import {onMounted, ref} from "vue";
+import {createCommentVNode, onMounted, ref} from "vue";
+import type {Ref} from "vue";
 import {Octokit} from "@octokit/rest"
 
-import RepositoriesListing from "@/components/RepositoriesListing.vue";
+interface UserInfo {
+  username: string;
+  name: string;
+  avatar: string;
+}
+
 import UserInfo from "@/components/UserInfo.vue";
+import RepositoryCommits from "@/components/RepositoryCommits.vue";
 import Search from "@/components/Search.vue";
 
 import getRepositories from "@/composables/getRepositories";
 import getAccessToken from "@/composables/getAccessToken";
-import RepositoryCommits from "@/components/RepositoryCommits.vue";
+import getUserInfo from "@/composables/getUserInfo";
+import AuthButton from "@/components/AuthButton.vue";
+import getCommits from "@/composables/getCommits";
 
 const error = ref("")
-const repos = ref([] as any[])
-const name = ref("")
-const username = ref("")
-const avatar = ref("")
 const commits = ref([] as any[]);
-
+const repositories = ref([] as any[])
+const userInfo: Ref<UserInfo> = ref({
+  username: "",
+  name: "",
+  avatar: "",
+});
+const selectedRepository = ref("");
 
 let octokit: Octokit;
 
-onMounted(async () => {
 
+onMounted(async () => {
   const queryString = window.location.search;
   const urlParams = new URLSearchParams(queryString);
   const codeParam = urlParams.get("code");
@@ -30,28 +41,10 @@ onMounted(async () => {
   if (!codeParam) return;
 
   const {accessToken} = await getAccessToken(codeParam, error)
-
-
   octokit = new Octokit({auth: `token ${accessToken.value}`});
 
-  const {repositories} = await getRepositories(octokit, error);
-  repos.value = repositories.value;
-
-
-  // Get User Info
-  try {
-    const response = await octokit.users.getAuthenticated();
-    const user = response.data;
-
-    username.value = user.login;
-    name.value = user.name !== null ? user.name : user.login;
-    avatar.value = user.avatar_url;
-
-  } catch (e) {
-    console.error(e);
-    error.value = `${e}, please try gain!`;
-  }
-
+  repositories.value = (await getRepositories(octokit)).repositories.value;
+  userInfo.value = (await getUserInfo(octokit)).userInfo.value;
 
 })
 
@@ -59,62 +52,45 @@ function handleClick() {
   window.location.assign(`https://github.com/login/oauth/authorize?client_id=${import.meta.env.VITE_CLIENT_ID}`)
 }
 
-function handleSelect(repository: string) {
-  console.log("Selected", repository)
-  octokit.repos.listCommits({
-    owner: username.value,
-    repo: repository
-  }).then(({data}) => {
+async function handleSelect(repository: string) {
+  selectedRepository.value = repository;
 
-    commits.value = []
+  commits.value = await getCommits(octokit, repository, userInfo.value.username)
+  console.log("Ok: ", commits.value)
 
-    data.forEach((commit) => {
-      console.log('Commit Title:', commit.commit.message);
-      commits.value.push(commit.commit.message)
-    });
-
-  })
-      .catch((error) => {
-        console.error(error);
-      });
 }
 
 </script>
 
 <template>
-  <div class="container">
+  <div class="flex flex-col items-center justify-center gap-8">
 
-    <div v-if="!repos.length">
 
-      <button @click="handleClick">Login with github</button>
-    </div>
-    <div v-if="error">
+    <AuthButton v-if="!repositories.length" @click="handleClick">Login with github</AuthButton>
+
+    <div class="error" v-if="error">
       {{ error }}
     </div>
-    <div class="menu" v-if="repos.length > 0">
-      <UserInfo :name="name" :avatar="avatar"/>
-      <Search @select="handleSelect" :repositories="repos"/>
 
-    </div>
-    <div v-if="repos.length" class="commits">
-      <RepositoryCommits :commits="commits"/>
-    </div>
+
   </div>
 
+  <div class="flex flex-col justify-start gap-8 h-screen" v-if="repositories.length > 0">
+
+    <UserInfo :name="userInfo.name" :avatar="userInfo.avatar"/>
+    <Search @select="handleSelect" :repositories="repositories"/>
+    <RepositoryCommits :repo="selectedRepository" :commits="commits"/>
+
+  </div>
 
 </template>
 
 <style>
-.container {
-  display: flex;
-  flex-direction: row;
+
+
+.error {
+  color: crimson;
 }
 
-.menu {
-  flex: 30%;
-}
 
-.commits {
-  flex: 70%;
-}
 </style>

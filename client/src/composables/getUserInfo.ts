@@ -2,28 +2,33 @@ import type {Ref} from "vue";
 import type {Octokit} from "@octokit/rest";
 import {ref} from "vue";
 
-async function getUserInfo(octokit: Octokit, error: Ref<string>) {
+interface UserInfo {
+    username: string;
+    name: string;
+    avatar: string;
+}
 
 
-    const name = ref("")
-    const username = ref("")
-    const avatar = ref("")
+async function getUserInfo(octokit: Octokit) {
 
-
+    const userInfo: Ref<UserInfo> = ref({
+        username: "",
+        name: "",
+        avatar: "",
+    });
 
     try {
         const response = await octokit.users.getAuthenticated();
         const user = response.data;
 
-        username.value = user.login;
-        name.value = user.name !== null ? user.name : user.login;
-        avatar.value = user.avatar_url;
+        userInfo.value.username = user.login;
+        userInfo.value.name = user.name !== null ? user.name : user.login;
+        userInfo.value.avatar = user.avatar_url;
 
     } catch (e) {
         console.error(e);
-        error.value = `${e}, please try gain!`;
     }
-    return {name, username, avatar}
+    return {userInfo}
 }
 
 export default getUserInfo
