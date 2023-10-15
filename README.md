@@ -10,8 +10,8 @@ To get started, follow these steps:
    ```bash
    cd client
    
-   ```bash
-   npm install
+```bash
+npm install
 
    ```bash
    npm run dev
