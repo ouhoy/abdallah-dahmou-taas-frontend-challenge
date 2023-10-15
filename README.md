@@ -18,6 +18,8 @@ To get started, follow these steps:
 
 ### Server
 
+I have used a NodeJs Backend to generate the user's access token since I could not achieve that in the Frontend due to the CORS policy. If there is an alternative to this approach, please let me know.
+
 1. Navigate to the `server` folder:
    ```bash
    cd server
