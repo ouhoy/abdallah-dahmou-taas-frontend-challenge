@@ -9,11 +9,9 @@ To get started, follow these steps:
 1. Navigate to the `client` folder:
    ```bash
    cd client
-   
-```bash
-npm install
 
-   ```bash
+   npm install
+
    npm run dev
 
 ### Server
@@ -22,10 +20,8 @@ npm install
    ```bash
    cd server
    
-   ```bash
    npm install
 
-   ```bash
    npm run dev
 
 #### This will start the client and server applications.
