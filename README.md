@@ -9,17 +9,21 @@ To get started, follow these steps:
 1. Navigate to the `client` folder:
    ```bash
    cd client
-
+2. Add .env variables
+3. Install and run the project 
+   ```bash   
    npm install
 
    npm run dev
 
 ### Server
 
-2. Navigate to the `server` folder:
+1. Navigate to the `server` folder:
    ```bash
    cd server
-   
+2. Add .env variables
+3. Install and run the project 
+   ```bash   
    npm install
 
    npm run dev
