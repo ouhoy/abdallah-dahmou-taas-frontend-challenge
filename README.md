@@ -1,19 +1,11 @@
 # abdallah-dahmou-taas-frontend-challenge
 
-To run this project, first cd into the client folder and run the following commands:
+## Getting Started
 
-"
-npm install
-npm run dev
-"
+To get started, follow these steps:
 
+### Client
 
-Then, cd into the server folder and run the following commands:
-
-"
-npm install
-npm run dev
-"
-
-
-This will start the client and server applications.
+1. Navigate to the `client` folder:
+   ```bash
+   cd client
