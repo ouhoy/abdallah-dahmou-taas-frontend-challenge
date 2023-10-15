@@ -51,12 +51,21 @@ function handleClick(repository: string) {
                 d="m19 19-4-4m0-7A7 7 0 1 1 1 8a7 7 0 0 1 14 0Z"/>
         </svg>
       </div>
-      <input style="width: 1200px" v-model="search" type="search" id="default-search"
+      <input style="width: 1200px" v-model="search" autocomplete="nope"
              class="block w-80 p-4 pl-10 text-sm text-gray-900 border border-gray-300 rounded-lg bg-gray-50 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-             placeholder="Search Mockups, Logos..." required>
+             :placeholder="`Search repositories by ${searchMethod}`" required>
     </div>
 
-    <!--  Search  -->
+    <div class="mt-3 flex gap-3 items-center">
+
+
+      <select id="search-filter" v-model="searchMethod"
+              class=" bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
+        <option value="name">Name</option>
+        <option value="id">ID</option>
+
+      </select>
+    </div>
 
     <div class="search-results rounded-lg border">
       <p class="border-t border-gray-700 dark:border-gray-400 p-4 hover:bg-gray-200 dark:hover:bg-gray-600"

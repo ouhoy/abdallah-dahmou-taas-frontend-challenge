@@ -1,19 +1,33 @@
 <script setup lang="ts">
 
-const {commits, repo} = defineProps<{
-  commits: any[],
-  repo:string
-}>()
+import {ref} from "vue";
 
-console.log(repo)
+const {commits, branches} = defineProps<{
+  commits: any[],
+  branches: any[]
+}>();
+const emit = defineEmits();
+
+const selectedBranch = ref("");
+
+
+function handleBranchChange() {
+
+  emit("branchChange", selectedBranch.value)
+}
 
 
 </script>
 
 <template>
-
-  <div class="repo-container">
-
+  <div class="repo-container" v-if="commits.length">
+    <select v-model="selectedBranch" @change="handleBranchChange"
+            class="mb-8 bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
+      <option v-for="branch in branches" :value="branch.name">{{
+          branch.name
+        }}
+      </option>
+    </select>
 
     <ol v-for="commit in commits" class="relative border-l border-gray-200 dark:border-gray-700">
       <li class="mb-10 ml-6">
