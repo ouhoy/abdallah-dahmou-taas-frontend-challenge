@@ -60,8 +60,8 @@ function handleClick() {
 
 async function handleSelect(repository: string) {
 
-  commits.value = await getCommits(octokit, repository, userInfo.value.username)
   branches.value = await getBranches(octokit, repository, userInfo.value.username)
+  commits.value = await getCommits(octokit, repository, userInfo.value.username)
   selectedRepository.value = repository;
 }
 

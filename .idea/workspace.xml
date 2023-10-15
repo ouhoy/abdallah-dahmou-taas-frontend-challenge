@@ -5,14 +5,15 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="268ab48f-0a6c-4a45-a26a-1ec79db4d3b1" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/client/src/composables/getBranches.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/server/.env" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/client/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/client/.gitignore" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/src/components/RepositoriesListing.vue" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/client/src/components/RepositoryCommits.vue" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/components/RepositoryCommits.vue" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/client/src/components/Search.vue" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/components/Search.vue" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/client/src/composables/getCommits.ts" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/composables/getCommits.ts" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/client/src/views/UserAuthView.vue" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/views/UserAuthView.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/server/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/server/.gitignore" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -96,7 +97,7 @@
       <workItem from="1697290172738" duration="1056000" />
       <workItem from="1697291911195" duration="5815000" />
       <workItem from="1697302652075" duration="6505000" />
-      <workItem from="1697319133380" duration="5196000" />
+      <workItem from="1697319133380" duration="8973000" />
     </task>
     <servers />
   </component>

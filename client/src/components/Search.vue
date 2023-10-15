@@ -68,7 +68,7 @@ function handleClick(repository: string) {
     </div>
 
     <div class="search-results rounded-lg border">
-      <p class="border-t border-gray-700 dark:border-gray-400 p-4 hover:bg-gray-200 dark:hover:bg-gray-600"
+      <p class="border-t border-gray-300 dark:border-gray-400 p-4 hover:bg-gray-200 dark:hover:bg-gray-600"
          v-for="repo in searchResults"
          @click="handleClick(repo.name)">{{ repo.name }}</p>
 
